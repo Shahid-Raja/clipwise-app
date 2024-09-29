@@ -5,18 +5,16 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Home', 'Shop', 'About Us', 'Help'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function HeaderComponent() {
+function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -36,9 +34,16 @@ function HeaderComponent() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: 'lightblue', // Transparent background
+          borderBottom: '1px solid lightblue', // Light blue solid border at the bottom
+          boxShadow: 'none', // Remove default shadow
+        }}
+      >
+        <Toolbar>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -49,26 +54,16 @@ function HeaderComponent() {
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
+              fontWeight: 400,
+              fontSize:"20px",
+              lineHeight:"26px",
               color: 'inherit',
-              textDecoration: 'none',
             }}
           >
-            LOGO
+            Pop Rock Crystal
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
+          <Box sx={{ flexGrow: 1, display: 'flex', md: 'none', xs: 'flex' }}>
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -87,11 +82,12 @@ function HeaderComponent() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
+                  <Typography sx={{ textAlign: 'center',fontSize:"16px",fontWeight:500,lineHeight:"30px", }}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -109,8 +105,9 @@ function HeaderComponent() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Pop Rock Crystal
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -122,10 +119,11 @@ function HeaderComponent() {
               </Button>
             ))}
           </Box>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0}}>
+                <Avatar alt="Clipwise" src="/static/images/avatar/2.jpg"/>
               </IconButton>
             </Tooltip>
             <Menu
@@ -152,8 +150,12 @@ function HeaderComponent() {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+
+      {/* Add padding or margin to prevent content from being hidden behind the fixed AppBar */}
+      <Toolbar />
+    </Box>
   );
 }
-export default HeaderComponent;
+
+export default ResponsiveAppBar;
